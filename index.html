@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gallery">
+    <img src="https://picsum.photos/id/1015/300/200" onclick="openViewer(0)">
+    <img src="https://picsum.photos/id/1025/300/200" onclick="openViewer(1)">
+    <img src="https://picsum.photos/id/1035/300/200" onclick="openViewer(2)">
+    <img src="https://picsum.photos/id/1045/300/200" onclick="openViewer(3)">
+  </div>
+
+  <!-- Viewer Modal -->
+  <div id="viewer" class="viewer">
+    <span class="close" onclick="closeViewer()">&times;</span>
+    <img id="viewerImg" src="">
+    <div class="controls">
+      <button onclick="prevImage()">⟨</button>
+      <button onclick="nextImage()">⟩</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
