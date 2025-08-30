@@ -3,24 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Viewer</title>
+  <title>Simple Calculator</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <div class="gallery">
-    <img src="images/p1.jpg" onclick="openViewer(0)">
-    <img src="https://picsum.photos/id/1025/300/200" onclick="openViewer(1)">
-    <img src="https://picsum.photos/id/1035/300/200" onclick="openViewer(2)">
-    <img src="https://picsum.photos/id/1045/300/200" onclick="openViewer(3)">
-  </div>
+  <div class="container">
+    <!-- Left: Calculator -->
+    <div class="calculator">
+      <h2><span class="material-icons">calculate</span> Simple Calculator</h2>
+      <input type="text" id="display" readonly>
+      
+      <div class="buttons">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="backspace()">⌫</button>
+        <button onclick="appendValue('%')">%</button>
+        <button onclick="appendValue('/')">÷</button>
 
-  <!-- Viewer Modal -->
-  <div id="viewer" class="viewer">
-    <span class="close" onclick="closeViewer()">&times;</span>
-    <img id="viewerImg" src="">
-    <div class="controls">
-      <button onclick="prevImage()">⟨</button>
-      <button onclick="nextImage()">⟩</button>
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button onclick="appendValue('*')">×</button>
+
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="appendValue('-')">−</button>
+
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="appendValue('+')">+</button>
+
+        <button onclick="appendValue('0')">0</button>
+        <button onclick="appendValue('.')">.</button>
+        <button class="equal" onclick="calculateResult()">=</button>
+      </div>
+    </div>
+
+    <!-- Right: History -->
+    <div class="history">
+      <div class="history-header">
+        <h3>History</h3>
+        <span class="material-icons bin" onclick="clearHistory()">delete</span>
+      </div>
+      <ul id="history-list"></ul>
     </div>
   </div>
 

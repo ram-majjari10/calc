@@ -1,31 +1,50 @@
-let currentIndex = 0;
+let display = document.getElementById("display");
+let historyList = document.getElementById("history-list");
 
-const images = [
-  "https://picsum.photos/id/1015/900/600",
-  "https://picsum.photos/id/1025/900/600",
-  "https://picsum.photos/id/1035/900/600",
-  "https://picsum.photos/id/1045/900/600"
-];
-
-let viewer = document.getElementById("viewer");
-let viewerImg = document.getElementById("viewerImg");
-
-function openViewer(index) {
-  currentIndex = index;
-  viewer.style.display = "flex";
-  viewerImg.src = images[currentIndex];
+function appendValue(value) {
+  display.value += value;
 }
 
-function closeViewer() {
-  viewer.style.display = "none";
+function clearDisplay() {
+  display.value = "";
 }
 
-function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
-  viewerImg.src = images[currentIndex];
+function backspace() {
+  display.value = display.value.slice(0, -1);
 }
 
-function prevImage() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  viewerImg.src = images[currentIndex];
+function calculateResult() {
+  try {
+    let result = eval(display.value);
+    if (result !== undefined) {
+      addToHistory(display.value + " = " + result);
+      display.value = result;
+    }
+  } catch {
+    display.value = "Error";
+  }
 }
+
+function addToHistory(entry) {
+  let li = document.createElement("li");
+  li.textContent = entry;
+  historyList.insertBefore(li, historyList.firstChild);
+}
+
+function clearHistory() {
+  historyList.innerHTML = "";
+}
+
+// ✅ Keyboard support
+document.addEventListener("keydown", function(event) {
+  if (!isNaN(event.key) || "+-*/.%".includes(event.key)) {
+    appendValue(event.key);
+  } else if (event.key === "Enter") {
+    event.preventDefault();
+    calculateResult();
+  } else if (event.key === "Backspace") {
+    backspace();
+  } else if (event.key === "Escape") {
+    clearDisplay();
+  }
+});
